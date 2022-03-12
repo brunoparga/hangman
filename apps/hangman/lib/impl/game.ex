@@ -50,6 +50,18 @@ defmodule Hangman.Impl.Game do
   end
 
   #########################################################
+
+  @spec tally(t) :: Type.tally()
+  def tally(game) do
+    %{
+      turns_left: game.turns_left,
+      game_state: game.game_state,
+      letters: reveal_guessed_letters(game),
+      used: game.used |> MapSet.to_list() |> Enum.sort()
+    }
+  end
+
+  #########################################################
   ####  PRIVATE FUNCTIONS #################################
   #########################################################
 
@@ -83,6 +95,8 @@ defmodule Hangman.Impl.Game do
   #########################################################
 
   @spec reveal_guessed_letters(t) :: list(String.t())
+  defp reveal_guessed_letters(%{ game_state: :lost, letters: word}), do: word
+
   defp reveal_guessed_letters(game) do
     game.letters
     |> Enum.map(fn letter -> MapSet.member?(game.used, letter) |> maybe_reveal(letter) end)
@@ -102,18 +116,6 @@ defmodule Hangman.Impl.Game do
 
   defp score_guess(game, _bad_guess) do
     %__MODULE__{game | turns_left: game.turns_left - 1, game_state: :bad_guess}
-  end
-
-  #########################################################
-
-  @spec tally(t) :: Type.tally()
-  defp tally(game) do
-    %{
-      turns_left: game.turns_left,
-      game_state: game.game_state,
-      letters: reveal_guessed_letters(game),
-      used: game.used |> MapSet.to_list() |> Enum.sort()
-    }
   end
 
   #########################################################

@@ -1,4 +1,4 @@
-defmodule Forca.MixProject do
+defmodule HangmanUmbrella.MixProject do
   use Mix.Project
 
   def project do

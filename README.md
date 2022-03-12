@@ -1,4 +1,4 @@
-# Forca
+# Hangman
 
 **TODO: Add description**
 
