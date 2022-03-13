@@ -3,12 +3,13 @@ defmodule Dictionary do
   The dictionary for a Hangman game.
   """
 
-  alias Dictionary.Impl.WordList
-  @opaque t :: WordList.t()
+  alias Dictionary.Runtime.Server
 
-  @spec start() :: t
-  defdelegate start, to: WordList, as: :word_list
+  @opaque t :: Server.t()
 
-  @spec random_word(list(String.t())) :: String.t()
-  defdelegate random_word(word_list), to: WordList
+  @spec start_link() :: {:error, any()} | {:ok, t()}
+  defdelegate start_link, to: Server
+
+  @spec random_word(pid()) :: String.t()
+  defdelegate random_word(pid), to: Server
 end
