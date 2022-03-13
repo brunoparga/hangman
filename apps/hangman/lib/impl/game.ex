@@ -95,7 +95,7 @@ defmodule Hangman.Impl.Game do
   #########################################################
 
   @spec reveal_guessed_letters(t) :: list(String.t())
-  defp reveal_guessed_letters(%{ game_state: :lost, letters: word}), do: word
+  defp reveal_guessed_letters(%{game_state: :lost, letters: word}), do: word
 
   defp reveal_guessed_letters(game) do
     game.letters

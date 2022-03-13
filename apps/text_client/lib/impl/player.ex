@@ -72,6 +72,7 @@ defmodule TextClient.Impl.Player do
   defp interact({game, tally}) do
     IO.puts(feedback_for(tally))
     IO.puts(current_word(tally))
+
     Hangman.make_move(game, get_guess())
     |> interact()
   end
