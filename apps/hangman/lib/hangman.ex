@@ -1,13 +1,20 @@
 defmodule Hangman do
-  alias Hangman.{Impl.Game, Type}
-  @opaque game :: Game.t()
+  alias Hangman.{Runtime.Server, Type}
+  @opaque server :: Server.t()
 
-  @spec make_move(game, String.t()) :: {game, Type.tally()}
-  defdelegate make_move(game, guess), to: Game
+  @spec make_move(server, String.t()) :: {server, Type.tally()}
+  def make_move(server, guess) do
+    GenServer.call(server, {:make_move, guess})
+  end
 
-  @spec new_game() :: game
-  defdelegate new_game, to: Game
+  @spec new_game() :: server
+  def new_game do
+    {:ok, pid} = GenServer.start_link(Server, nil)
+    pid
+  end
 
-  @spec tally(Game.t()) :: Type.tally()
-  defdelegate tally(game), to: Game
+  @spec tally(server) :: Type.tally()
+  def tally(server) do
+    GenServer.call(server, {:tally})
+  end
 end

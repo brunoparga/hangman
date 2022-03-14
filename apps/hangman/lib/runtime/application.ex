@@ -1,13 +1,13 @@
-defmodule Dictionary.Runtime.Application do
+defmodule Hangman.Runtime.Application do
   use Application
 
   def start(_type, _args) do
     children = [
-      {Dictionary.Runtime.Server, []}
+      {Hangman.Runtime.Server, []}
     ]
 
     options = [
-      name: Dictionary.Runtime.Supervisor,
+      name: Hangman.Runtime.Supervisor,
       strategy: :one_for_one
     ]
 
