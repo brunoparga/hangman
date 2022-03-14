@@ -3,9 +3,9 @@ defmodule TextClient.Impl.Player do
   ####  ALIASES AND TYPES  ################################
   #########################################################
 
-  @typep game :: Hangman.game()
+  @typep server :: Hangman.server()
   @typep tally :: Hangman.Type.tally()
-  @typep state :: {game, tally}
+  @typep state :: {server, tally}
 
   #########################################################
   ####  PUBLIC INTERFACE  #################################
@@ -21,7 +21,7 @@ defmodule TextClient.Impl.Player do
   #########################################################
   ####  PRIVATE FUNCTIONS #################################  #########################################################
 
-  @spec current_word(tally) :: String.t()
+  @spec current_word(tally) :: list(String.t())
   defp current_word(%{letters: word, turns_left: turns, used: used}) do
     [
       "\nTurns left: ",
@@ -59,9 +59,6 @@ defmodule TextClient.Impl.Player do
 
   #########################################################
 
-  # @type state ::
-  # :initializing | :won | :lost | :good_guess | :bad_guess | :already_used | :invalid_guess
-
   @spec interact(state) :: :ok
   defp interact({_game, %{game_state: :won}}), do: IO.puts("Congratulations. You won!")
 
@@ -73,7 +70,7 @@ defmodule TextClient.Impl.Player do
     IO.puts(feedback_for(tally))
     IO.puts(current_word(tally))
 
-    Hangman.make_move(game, get_guess())
-    |> interact()
+    tally = Hangman.make_move(game, get_guess())
+    interact({game, tally})
   end
 end
