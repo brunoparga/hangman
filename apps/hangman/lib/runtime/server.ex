@@ -3,6 +3,10 @@ defmodule Hangman.Runtime.Server do
   use GenServer
   @type t :: pid()
 
+  def start_link(_args) do
+    GenServer.start_link(__MODULE__, nil)
+  end
+
   def init(_args) do
     {:ok, Game.new_game()}
   end

@@ -8,8 +8,8 @@ defmodule Hangman do
   end
 
   @spec new_game() :: server
-  def new_game do
-    {:ok, pid} = GenServer.start_link(Server, nil)
+  def new_game() do
+    {:ok, pid} = Hangman.Runtime.Application.start_game
     pid
   end
 
