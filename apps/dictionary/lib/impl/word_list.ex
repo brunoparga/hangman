@@ -2,7 +2,7 @@ defmodule Dictionary.Impl.WordList do
   @type t :: list(String.t())
 
   def word_list do
-    "apps/dictionary/assets/words.txt"
+    "/home/bruno/code/learn/hangman/apps/dictionary/assets/words.txt"
     |> File.read!()
     |> String.split(~r/\n/, trim: true)
   end

@@ -11,11 +11,10 @@ defmodule TextClient.Impl.Player do
   ####  PUBLIC INTERFACE  #################################
   #########################################################
 
-  @spec start :: :ok
-  def start do
-    game = Hangman.new_game()
-    tally = Hangman.tally(game)
-    interact({game, tally})
+  @spec start(server) :: :ok
+  def start(server) do
+    tally = Hangman.tally(server)
+    interact({server, tally})
   end
 
   #########################################################
