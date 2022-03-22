@@ -18,7 +18,8 @@ defmodule TextClient.Impl.Player do
   end
 
   #########################################################
-  ####  PRIVATE FUNCTIONS #################################  #########################################################
+  ####  PRIVATE FUNCTIONS #################################
+  #########################################################
 
   @spec current_word(tally) :: list(String.t())
   defp current_word(%{letters: word, turns_left: turns, used: used}) do
