@@ -33,6 +33,7 @@ defmodule Browser2.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Third-party dependencies
       {:phoenix, "~> 1.6.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -43,7 +44,10 @@ defmodule Browser2.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+
+      # Local dependencies
+      {:hangman, path: "../hangman-umbrella/apps/hangman"}
     ]
   end
 
