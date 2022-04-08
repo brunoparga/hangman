@@ -10,11 +10,16 @@ defmodule Browser2Web.Live.Game do
 
   def render(assigns) do
     ~H"""
-    <div class="game-holder">
+    <div class="game-holder" phx-window-keyup="make_move">
       <%= live_component(__MODULE__.Figure, turns_left: assigns.tally.turns_left, id: "figure") %>
       <%= live_component(__MODULE__.Alphabet, used: assigns.tally.used, id: "alphabet") %>
-      <%= live_component(__MODULE__.WordSoFar, word_so_far: assigns.tally.letters, id: 3) %>
+      <%= live_component(__MODULE__.WordSoFar, tally: assigns.tally, id: "word_so_far") %>
     </div>
     """
+  end
+
+  def handle_event("make_move", %{"key" => key}, socket) do
+    tally = Hangman.make_move(socket.assigns.game, key)
+    {:noreply, assign(socket, :tally, tally)}
   end
 end

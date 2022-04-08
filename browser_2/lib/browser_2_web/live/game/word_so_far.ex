@@ -1,9 +1,41 @@
 defmodule Browser2Web.Live.Game.WordSoFar do
   use Browser2Web, :live_component
 
+  @game_states %{
+    initializing: {"initializing", "Guess the word, a letter at a time."},
+    good_guess: {"good-guess", "Good guess!"},
+    bad_guess: {"bad-guess", "Sorry, that letter is not in the word."},
+    won: {"won", "You won!"},
+    lost: {"lost", "Sorry, you lost..."},
+    already_used: {"already-used", "You already used that letter."},
+    invalid_guess: {"invalid-guess", "Please enter only one letter."}
+  }
+
   def render(assigns) do
     ~H"""
-    <p>Word so far: <%= assigns.word_so_far %></p>
+    <div class="word-so-far">
+
+      <div class="game-state">
+      <%= display_state(@tally.game_state) %>
+      </div>
+
+      <div class="letters">
+      <%= for char <- @tally.letters do %>
+        <div class={set_class(char)}>
+        <%= char %>
+        </div>
+      <% end %>
+      </div>
+
+    </div>
     """
   end
+
+  defp display_state(state) do
+    {_class, text} = @game_states[state]
+    text
+  end
+
+  defp set_class("_"), do: "one-letter"
+  defp set_class(_), do: "one-letter correct"
 end
