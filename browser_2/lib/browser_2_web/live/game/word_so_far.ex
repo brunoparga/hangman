@@ -21,7 +21,7 @@ defmodule Browser2Web.Live.Game.WordSoFar do
 
       <div class="letters">
       <%= for char <- @tally.letters do %>
-        <div class={set_class(char)}>
+        <div class={"one-letter" <> set_class(char)}>
         <%= char %>
         </div>
       <% end %>
@@ -36,6 +36,6 @@ defmodule Browser2Web.Live.Game.WordSoFar do
     text
   end
 
-  defp set_class("_"), do: "one-letter"
-  defp set_class(_), do: "one-letter correct"
+  defp set_class("_"), do: ""
+  defp set_class(_), do: " correct"
 end

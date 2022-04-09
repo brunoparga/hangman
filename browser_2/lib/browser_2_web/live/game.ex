@@ -12,7 +12,7 @@ defmodule Browser2Web.Live.Game do
     ~H"""
     <div class="game-holder" phx-window-keyup="make_move">
       <%= live_component(__MODULE__.Figure, turns_left: assigns.tally.turns_left, id: "figure") %>
-      <%= live_component(__MODULE__.Alphabet, used: assigns.tally.used, id: "alphabet") %>
+      <%= live_component(__MODULE__.Alphabet, tally: assigns.tally, id: "alphabet") %>
       <%= live_component(__MODULE__.WordSoFar, tally: assigns.tally, id: "word_so_far") %>
     </div>
     """
