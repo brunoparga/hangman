@@ -1,0 +1,11 @@
+<div class="alphabet">
+<%= for letter <- ~w[a b c d e f g h i j k l m n o p q r s t u v w x y z] do %>
+  <div
+    phx-click="make_move"
+    phx-value-key={letter}
+    class={"one-letter" <> set_class(letter, @tally)}
+  >
+  <%= letter %>
+  </div>
+<% end %>
+</div>

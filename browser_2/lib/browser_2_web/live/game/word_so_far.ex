@@ -11,26 +11,6 @@ defmodule Browser2Web.Live.Game.WordSoFar do
     invalid_guess: {"invalid-guess", "Please enter only one letter."}
   }
 
-  def render(assigns) do
-    ~H"""
-    <div class="word-so-far">
-
-      <div class="game-state">
-      <%= display_state(@tally.game_state) %>
-      </div>
-
-      <div class="letters">
-      <%= for char <- @tally.letters do %>
-        <div class={"one-letter" <> set_class(char)}>
-        <%= char %>
-        </div>
-      <% end %>
-      </div>
-
-    </div>
-    """
-  end
-
   defp display_state(state) do
     {_class, text} = @game_states[state]
     text
