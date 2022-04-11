@@ -46,7 +46,7 @@ defmodule Browser2.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       # Local dependencies
-      {:hangman, path: "../hangman-umbrella/apps/hangman"}
+      {:hangman, in_umbrella: true}
     ]
   end
 
